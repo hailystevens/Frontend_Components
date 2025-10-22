@@ -1,2 +1,1 @@
-# CotentaDocs
-Contenta's compiled documentation from their public site
+# Easy Plug and Play HTML CSS JS etc
