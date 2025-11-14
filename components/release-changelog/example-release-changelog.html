@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Release Changelog Component Example</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin: 0 0 10px 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .header p {
+      font-size: 1.2em;
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .demo-section {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .demo-section h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    .controls {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .controls h3 {
+      margin-top: 0;
+      color: #34495e;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .code-block {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .info-box {
+      background: #e8f4f8;
+      border-left: 4px solid #3498db;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+
+    .info-box strong {
+      color: #2980b9;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .header h1 {
+        font-size: 1.8em;
+      }
+
+      .demo-section {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>🚀 Release Changelog Component</h1>
+      <p>A self-contained web component for displaying release changelogs</p>
+    </header>
+
+    <!-- Example 1: Load from external JSON file -->
+    <section class="demo-section">
+      <h2>Example 1: Loading from External JSON</h2>
+      <div class="info-box">
+        <strong>Usage:</strong> The component loads data from an external JSON file using the <code>src</code> attribute.
+      </div>
+      
+      <release-changelog 
+        id="changelog1" 
+        src="sample-changelog.json"
+        items-per-page="3">
+      </release-changelog>
+
+      <details style="margin-top: 20px;">
+        <summary style="cursor: pointer; font-weight: bold; color: #2c3e50;">View Code</summary>
+        <div class="code-block">
+&lt;release-changelog src="sample-changelog.json" items-per-page="3"&gt;&lt;/release-changelog&gt;
+
+&lt;script type="module" src="./release-changelog.js"&gt;&lt;/script&gt;
+        </div>
+      </details>
+    </section>
+
+    <!-- Example 2: Inline JSON data -->
+    <section class="demo-section">
+      <h2>Example 2: Inline JSON Data</h2>
+      <div class="info-box">
+        <strong>Usage:</strong> You can pass JSON data directly via the <code>data</code> attribute.
+      </div>
+      
+      <release-changelog 
+        id="changelog2"
+        items-per-page="2"
+        data='{
+          "meta": {
+            "title": "Mini Changelog",
+            "description": "Inline data example with custom items"
+          },
+          "items": [
+            {
+              "version": "3.0.0",
+              "date": "2024-11-14",
+              "title": "Inline Example Release",
+              "description": "This data is embedded directly in the HTML",
+              "changes": [
+                "Demonstrates inline JSON usage",
+                "No external file needed",
+                "Perfect for small changelogs"
+              ],
+              "lastUpdated": "2024-11-14",
+              "issue": "https://github.com/example/repo/issues/1"
+            },
+            {
+              "version": "2.9.0",
+              "date": "2024-10-01",
+              "title": "Previous Release",
+              "description": "Another example item",
+              "changes": [
+                "Feature A",
+                "Feature B",
+                "Bug fixes"
+              ],
+              "lastUpdated": "2024-10-05"
+            }
+          ]
+        }'>
+      </release-changelog>
+
+      <details style="margin-top: 20px;">
+        <summary style="cursor: pointer; font-weight: bold; color: #2c3e50;">View Code</summary>
+        <div class="code-block">
+&lt;release-changelog data='{"meta": {...}, "items": [...]}'&gt;&lt;/release-changelog&gt;
+        </div>
+      </details>
+    </section>
+
+    <!-- Example 3: Programmatic API -->
+    <section class="demo-section">
+      <h2>Example 3: Programmatic API</h2>
+      <div class="info-box">
+        <strong>Usage:</strong> Control the component using JavaScript with the <code>setData()</code> method.
+      </div>
+
+      <div class="controls">
+        <h3>Try It Out:</h3>
+        <div class="button-group">
+          <button onclick="loadSampleData()">Load Sample Data</button>
+          <button onclick="loadMinimalData()">Load Minimal Data</button>
+          <button onclick="loadLargeDataset()">Load Large Dataset (12 items)</button>
+          <button onclick="clearData()">Clear Data</button>
+        </div>
+      </div>
+      
+      <release-changelog id="changelog3" items-per-page="4"></release-changelog>
+
+      <details style="margin-top: 20px;">
+        <summary style="cursor: pointer; font-weight: bold; color: #2c3e50;">View Code</summary>
+        <div class="code-block">
+const changelog = document.getElementById('changelog3');
+
+changelog.setData({
+  meta: {
+    title: "My Changelog",
+    description: "Dynamically loaded data"
+  },
+  items: [
+    {
+      version: "1.0.0",
+      date: "2024-01-01",
+      title: "Initial Release",
+      changes: ["First feature", "Second feature"]
+    }
+  ]
+});
+        </div>
+      </details>
+    </section>
+
+    <!-- Documentation -->
+    <section class="demo-section">
+      <h2>📚 Documentation</h2>
+      
+      <h3>Attributes</h3>
+      <ul>
+        <li><strong>src</strong> - URL to external JSON file</li>
+        <li><strong>data</strong> - Inline JSON string with changelog data</li>
+        <li><strong>items-per-page</strong> - Number of items per page (default: 5)</li>
+      </ul>
+
+      <h3>Features</h3>
+      <ul>
+        <li>✅ Single-file web component (no dependencies)</li>
+        <li>✅ Automatic pagination for large changelogs</li>
+        <li>✅ Auto-fill missing properties from meta defaults</li>
+        <li>✅ Responsive design with shadow DOM</li>
+        <li>✅ Programmatic API with setData() method</li>
+        <li>✅ Support for external JSON or inline data</li>
+      </ul>
+
+      <div class="info-box" style="margin-top: 20px;">
+        <strong>📂 Files:</strong>
+        <ul style="margin: 10px 0 0 0;">
+          <li><code>release-changelog.js</code> - The web component</li>
+          <li><code>sample-changelog.json</code> - Sample data with 10 items</li>
+          <li><code>README.md</code> - Complete documentation</li>
+          <li><code>example-release-changelog.html</code> - This demo page</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <!-- Import the component -->
+  <script type="module" src="./release-changelog.js"></script>
+
+  <!-- Demo scripts -->
+  <script>
+    function loadSampleData() {
+      const changelog = document.getElementById('changelog3');
+      changelog.setData({
+        meta: {
+          title: "Sample Changelog",
+          description: "Programmatically loaded sample data",
+          lastUpdated: "2024-11-14",
+          issue: "https://github.com/example/repo/issues"
+        },
+        items: [
+          {
+            version: "1.5.0",
+            date: "2024-11-14",
+            title: "New Features Added",
+            description: "This is a programmatically loaded changelog entry",
+            changes: [
+              "Added feature X",
+              "Improved performance",
+              "Fixed critical bugs"
+            ]
+          },
+          {
+            version: "1.4.0",
+            date: "2024-10-01",
+            title: "October Update",
+            changes: [
+              "UI improvements",
+              "New API endpoints"
+            ]
+          }
+        ]
+      });
+    }
+
+    function loadMinimalData() {
+      const changelog = document.getElementById('changelog3');
+      changelog.setData({
+        meta: {
+          title: "Minimal Example"
+        },
+        items: [
+          {
+            version: "1.0.0",
+            date: "2024-11-14",
+            title: "Single Item",
+            description: "This shows the minimal required data"
+          }
+        ]
+      });
+    }
+
+    function loadLargeDataset() {
+      const changelog = document.getElementById('changelog3');
+      const items = [];
+      
+      for (let i = 12; i >= 1; i--) {
+        items.push({
+          version: `1.${i}.0`,
+          date: `2024-${String(i).padStart(2, '0')}-01`,
+          title: `Release 1.${i}.0`,
+          description: `Monthly release for period ${i}`,
+          changes: [
+            `Feature ${i}A`,
+            `Feature ${i}B`,
+            `Bug fixes for version 1.${i}`
+          ]
+        });
+      }
+
+      changelog.setData({
+        meta: {
+          title: "Large Changelog",
+          description: "12 items to demonstrate pagination",
+          lastUpdated: "2024-11-14"
+        },
+        items: items
+      });
+    }
+
+    function clearData() {
+      const changelog = document.getElementById('changelog3');
+      changelog.setData({
+        meta: {
+          title: "Empty Changelog"
+        },
+        items: []
+      });
+    }
+
+    // Load initial data after component is defined
+    customElements.whenDefined('release-changelog').then(() => {
+      loadSampleData();
+    });
+  </script>
+</body>
+</html>
